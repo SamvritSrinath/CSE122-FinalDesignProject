@@ -1,64 +1,43 @@
-\newcommand{\PaperTitle}{Automating IP Service Operator Identification At Scale}
-% TODO fill in your paper number when you get it
-\newcommand{\PaperNumber}{XXX}
+\documentclass[sigconf,letterpaper,10pt,nonacm]{acmart}
 
-%\documentclass[10pt,sigconf,letterpaper,anonymous,nonacm]{acmart}
-\documentclass[10pt,sigconf,letterpaper,nonacm]{acmart}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This is the preamble; include packages as you see fit.
-% Here are a few recommendations:
-% \usepackage{color}
-% \usepackage{graphicx}
-% \usepackage[labelformat=simple]{subcaption}
-% \usepackage{multirow}
-% \usepackage[ruled,vlined]{algorithm2e}
-% \usepackage{ulem}
-% \normalem
-% \usepackage{booktabs}
-% \usepackage{cite}
-\usepackage{xspace}
-\usepackage{caption}
-\captionsetup[table]{labelfont=normalfont, textfont=normalfont}
-\usepackage{hyperref}
-\usepackage{tcolorbox} % For boxed text
-\usepackage{courier}
-%\usepackage[hidelinks]{hyperref}
+% ACM recommends these packages which are already included in acmart
+% No need for manual inclusion of graphicx, hyperref, etc.
+% Only add packages that aren't already part of acmart
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Special commands
-\newcommand{\todo}[1]{{\color{red} TODO:  {#1}}}
-\newcommand{\future}[1]{{\color{blue}{#1}}}
-\newcommand{\TK}{{\color{red} TK }}
-\newcommand{\nextversion}[1]{{\color{pink}{#1}}}
-%\newcommand{\nextversion}[1]{{\color{pink}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\settopmatter{printacmref=false} % Removes the ACM reference block
+\setcopyright{none} % For non-ACM submission
+\input{meta}
 \begin{document}
 
-\title{\PaperTitle}
-
-
-\author[]{Samvrit Srinath}
+\title{Elephant Herd Tracking IoT Application: Design Decisions and Tradeoff Analysis}
+\author{Samvrit Srinath}
 \email{sasrinath@ucsd.edu}
-% \email{katherine@ucsd.edu \quad schaparala@ucsd.edu \quad mbp001@ucsd.edu \quad sasrinath@ucsd.edu}
-% \email{katherine@ucsd.edu,schaparala@ucsd.edu}
-% \email{mbp001@ucsd.edu,sasrinath@ucsd.edu}
+\affiliation{
+  \institution{University of California, San Diego}
+  \city{La Jolla}
+  \state{California}
+  \country{USA}
+}
 
-
-
-
-
-% \begin{abstract}
-% Insert abstract here.
-% \end{abstract}
+\begin{abstract}
+    This report presents the design considerations, energy modeling, structural components, and implementation feasibility of an IoT-based elephant herd tracking application. The system aims to monitor elephant migration patterns in Southern India (where the author is originally from), using a network of infrared-equipped sensor nodes. Inspired by other short range sensors like the ones used in Ring doorbells, the nodes will detect and localize elephants based on heat signatures. The report then concludes the two best wireless technologies for this application, NB-IoT and LoRa, based on a tradeoff analysis of power consumption, data throughput, and cost efficiency. The final design is both cost-effective and energy-efficient, promising a robust solution for real-world wildlife monitoring.
+\end{abstract}
 
 \maketitle
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Sections/Intro.tex}
+% \input{Sections/PartA.tex}
+% \input{Sections/PartB.tex}
+% \input{Sections/Comparison.tex}
+\input{Sections/Conclusion.tex}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
-
-% \input{app}
-
 
 \end{document}
