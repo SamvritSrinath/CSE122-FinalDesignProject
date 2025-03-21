@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{5}
+\begin{thebibliography}{10}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -40,7 +40,7 @@
 \bibitem[wxk({[n.\,d.]})]%
         {wxkerela}
  \bibinfo{year}{[n.\,d.]}\natexlab{}.
-\newblock
+\newblock \bibinfo{booktitle}{}.
 \newblock
 \urldef\tempurl%
 \url{https://in.indeed.com/career/telecommunications-technician/salaries/Kochi--Kerala}
@@ -51,10 +51,43 @@
 \bibitem[jee({[n.\,d.]})]%
         {jeeprent}
  \bibinfo{year}{[n.\,d.]}\natexlab{}.
-\newblock
+\newblock \bibinfo{booktitle}{}.
 \newblock
 \urldef\tempurl%
 \url{https://www.chennaitravels.in/mahindra-thar-rental}
+\showURL{%
+\tempurl}
+
+
+\bibitem[ama({[n.\,d.]})]%
+        {amazonnb}
+ \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+\urldef\tempurl%
+\url{{https://docs.aws.amazon.com/whitepapers/latest/implementing-lpwan-solutions-with-aws/nb-iot.html}}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{Danish Khan}({[n.\,d.]})]%
+        {loraIndia}
+\bibfield{author}{\bibinfo{person}{{Danish Khan}}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{{LoRaWan vs NBIoT: How Tata Comm and SenRa driving India's IoT space as telcos wait and watch}}}.
+\newblock
+\urldef\tempurl%
+\url{https://telecom.economictimes.indiatimes.com/news/how-tata-comm-senra-driving-indias-iot-space-using-lorawan-as-telcos-still-finalise-nbiot-strategy/69983601}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Mint(2024)]%
+        {3gsunset}
+\bibfield{author}{\bibinfo{person}{Live Mint}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+\urldef\tempurl%
+\url{https://www.livemint.com/industry/telecom/reliance-jio-urges-government-to-shut-down-2g-3g-services-in-the-country-vodafone-idea-heres-what-you-should-know-11706582831319.html}
 \showURL{%
 \tempurl}
 
@@ -70,10 +103,34 @@
 \showDOI{\tempurl}
 
 
+\bibitem[{Pat Pannuto}(2025a)]%
+        {cellpat}
+\bibfield{author}{\bibinfo{person}{{Pat Pannuto}}.} \bibinfo{year}{{2025}}\natexlab{a}.
+\newblock \bibinfo{booktitle}{\emph{{Cellular}}}.
+\newblock
+\urldef\tempurl%
+\url{{https://drive.google.com/file/d/10yAwxdqM5ztwtH26nG6D6GQiUb0dbvnT/view}}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{Pat Pannuto}(2025b)]%
+        {lorapat}
+\bibfield{author}{\bibinfo{person}{{Pat Pannuto}}.} \bibinfo{year}{{2025}}\natexlab{b}.
+\newblock \bibinfo{booktitle}{\emph{{LPWANs}}}.
+\newblock
+\urldef\tempurl%
+\url{{https://drive.google.com/file/d/111VJZlof3eLgUXOWDz4TBXm4581yQpT8/view}}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{Slide 24,87}.
+
+
 \bibitem[Program({[n.\,d.]})]%
         {aecp}
 \bibfield{author}{\bibinfo{person}{The Asian Elephant~Conservation Program}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
-\newblock
+\newblock \bibinfo{booktitle}{}.
 \newblock
 \urldef\tempurl%
 \url{https://www.arocha.in/conservation/asian-elephant-conservation-program-aecp/}
@@ -84,7 +141,7 @@
 \bibitem[SOS({[n.\,d.]})]%
         {wildlifesos}
 \bibfield{author}{\bibinfo{person}{Wildlife SOS}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
-\newblock
+\newblock \bibinfo{booktitle}{}.
 \newblock
 \urldef\tempurl%
 \url{https://wildlifesos.org/}

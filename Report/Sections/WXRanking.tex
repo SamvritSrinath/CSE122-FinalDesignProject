@@ -21,15 +21,14 @@ From worst to best, the ranking is as follows:
 \begin{enumerate}
     \item \textbf{Bluetooth}
     \item \textbf{Wifi}
-    \item \textbf{Legacy Cellular(2G/3G)}
     \item \textbf{802.15.4/Thread}
+    \item \textbf{Legacy Cellular(2G/3G)}
     \item \textbf{High Performance Cellular(4G/5G)}
     \item \textbf{LoRA}
     \item \textbf{NB-IoT/LTE-M}
 \end{enumerate}
 
 \subsection{Bluetooth}
-\subsubsection{Bluetooth}
 Bluetooth is the least suitable technology for our elephant tracking application. While Bluetooth Low Energy (BLE) offers excellent power efficiency, its fundamental limitation is range—typically restricted to 10-100 meters in ideal conditions and significantly less in densely forested areas. The Neyyar Wildlife Sanctuary's 2600 sq.km area would require an impractically high density of nodes to create a functional network using Bluetooth.
 
 Furthermore, Especially in the context of connections and advertising, Setting up Connections and also in Emergency Mode, where we need to have a connction that frequently transmit data, the Frequency Hopping Schematic of Bluetooth would be a hindrance and would adversely affect the power consumption of the device.
@@ -41,5 +40,32 @@ Wifi unfortunately is not a good choice for this application. 802.11 is quite po
 
 This innately violates our power consumption constraint, as the access points necessary to cover the area of interest would consume too much power. That being said, the data throughput of WiFi is quite high, and it is quite cost efficient to run. India has been making a push for lower cost WiFi, and it is quite cheap to run (Jio 5G/HighSpeed Wifi Push). However, the range of Wifi is quite limited, and it would be difficult to cover the entire area of interest with Wifi.
 
+\subsection{802.15.4/Thread}
+802.15.4/Thread is a decent choice for our application, however it is difficult to form a Mesh Topology in the terrain that our application is placed in. While as a WPAN, we could extract $\sim 100$ meters of range, the terrain would make it difficult for this range to be achieved, and likewise setting up gateways would be extremely difficult, due to a lack of readily available power. That being said, any device that is has a radio capable of FSK or QPSK would be able to communicate with our nodes, and the power consumption of the network is quite low. The data throughput of the network is also quite high, and it is quite cost efficient to run. However, the range of 802.15.4/Thread is quite limited, and it would be difficult to cover the entire area of interest with 802.15.4/Thread. We also gain redundancy due to the $4:1$ symbol rate, and the network is quite robust. 
+
+However, a glaring constrint is the mesh topology and the range is simply not sufficient enough to cover the area of interest. Seeing as we can't put up gateways, and the terrain would make it difficult to form a mesh, and would worsen the power consumption of our end nodes, there are other technologies that would be better suited for our application.
 \subsection{Legacy Cellular(2G/3G)}
-Legacy Cellular is quite over-engineered for our application. The power 
+Legacy Cellular is quite over-engineered for our application. While 2G and 3G are quite power efficient, they are quite expensive to run, and the data throughput is quite high. As we saw in Homework 2, the cost for a 2G/3G connection is quite high (on the order of $7$ per month), and while the data throughput is quite high, for our application at most we will be sending $1 MB$ of data per second for our entire network, or $0.16$ bytes per second per node ( at least in Emergency Mode). 
+
+Another factor that exacerbates the 2G and 3G connection is the availability of such infrastructure. Since a property of our sensor nodes is that they require minimal maintanence, as India continues to push out for a 3G Sunset, the infrastructure for 3G will be dismantled, and it would be difficult to maintain the network. Jio, one of the largest telecom providers in India, has already started to dismantle their 3G network, and relying on such technology would be a poor choice\cite{3gsunset}. What 2G and 3G has going for it is its topology, communicating to a cell tower over a long distance is exactly what this application requires (as we need to communicate over a long distance). However, the cost of maintaining such a network is quite high, and the power consumption of the network is also quite high. Also a Cellular Radio would be quite expensive to incorporate into our nodes, and would be quite power hungry as well (due to a lack of further optimizations seen in NB-IoT and 4G).
+
+
+\subsection{High Performance Cellular(4G/5G)}
+
+Our Application's ideal topology would be a star topology or at least a set of star topologies (tree) that communicate with one and another. High Performance Cellular, while extremely power hungry, has the range and existing infrastructure to readily deploy such a network. Homework 2 outlines the ease of deploying a 4G network of sensor nodes, which for 6 months would be on the order of $\$20000$ for 1000 nodes. 
+
+The data throughput of 4G and 5G is also quite high, but perhaps too high for our application. The data throughput of 4G and 5G is on the order of $100$ Mbps, and we would only be sending $1 MB$ of data per second for our entire network. That being said, at the 800 MhZ frequency, the range of 4G is quite high, and it would be easy to cover the entire area of interest with 4G. Jio and other India Cellular Carriers like Vodafone and Airtel have alraedy rolled out 4G support for the entirety of India, and our detection network could easily take advantage of this existing infrastructure. That being said, even with this existing infrastructure, the cost to operate a 4G network is quite high(and 5G adds more throughput that is unnecessary for our application and increases the power consumption of the network). While 4G seems to be an effective approach to our application, the cost to operate such a network could be quite higher, and a lack of enterprise solutions available for 4G sims could make it difficult to sustainably keep the network running for a long period of time $>1$ year.
+
+\subsection{LoRA}
+LoRa is a great choice for this application, mainly because the Physical Layer of LoRa is quite power efficient, and has a much lower receive sensitivity. With the right antenna, we could easily cover the entire network with a few gateways along the perimeter of the Nayyer Wildlife Sanctuary. Rather than $100m$ in 802.15.4, Gateways could now be placed 10s of kilometers apart, and this would enable communication to occur across the entire network. With a TX Power of $20$ dBm, and a RX Sensitivity of $-119$ dBm, the impact of brushes or trees would be less than those of other technologies like BLE or 802.15.4. And while LoRawans would work well in practice, the difficulty with Lora is Adoption. Many of the existing Infrastructure in India is not LoRA enabled, and we would need to set up a translation gateway that would convert LoRA signals to 4G signals. Relative to the cost of the devices, as well as the installation cost of the gateways and the cost of the gateways themselves, the cost of the network would be quite low. The data throughput of LoRA is also quite high, and it is quite cost efficient to run. The Star Topology would also work well for most nodes, as every LoRa node that was within 20 km of a gateway would be able to communicate with the gateway\cite{lorapat}. The diameter of our provided area is around 50 km, so with on the order of $10$ gateways, we could cover the entire area of interest. That being said, these gateways would also need a LoRa Network Server that links the LoRa Network to the already existing cellular infrastructure. 
+
+Thus, the only downfall of LoRA is the lack of Lora Infrastructure so far, unlike the United States with companies like Helium \cite{loraIndia}. It should still be noted that LoRa is Operationally quite sound, due to its large range, low power consumption, and high data throughput, but the only thing that holds this technology back is adoption in India. 
+
+\subsection{NB-IoT/LTE-M}
+
+Qualitatively, NB-IoT seems to be the best choice for our application. The power consumption of NB-IoT is quite low, as we can gate the power of our NB-IoT application to be a max of $20$ dBm for TX, we can also allow for longer power off periods than conventional cellular devices, and optimize them for the IOT space. The data throughput of NB-IoT is also sufficient for our application, being $65$ kbps  and $26$ kbps downlink,\cite{cellpat} but we have range comparable to LoRa (on the order of 10 kilometers) \cite{amazonnb}.
+
+Power wise, NB-IoT is also much less power intensive than other cellular options, like $2G \sim 5G$, as we can enable power saving modes, limit TX Power, and also allow for "cellular" connections while being asleep for very long durations of time. The cost of NB-IoT is also much lower than paying for a 4G connection, due to enterprise pricing as well as the idea that our application uses very little data. In contrast to a finite $2.5Gb$ or $3Gb$ plan like Jio offers, NB-IoT plans would be on the order of a couple Megabyptes a month, so there would be no need for us as an application developer to pay for that much data that we would not use. 
+
+There is also 4G Coverage in that area, and we could easily set up a NB-IoT network that would communicate with the existing 4G infrastructure. The only downside of NB-IoT is the lack of infrastructure in India, and the lack of readily available NB-IoT modules. But many cellphone carries like Jio already offer NB-IoT support in various domains like fleet management and street lamps. 
+
