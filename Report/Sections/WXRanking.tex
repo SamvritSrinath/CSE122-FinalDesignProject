@@ -1,0 +1,45 @@
+\section{Wireless Technologies Ranking}
+
+At a high level, some key features of our system are that:
+\begin{itemize}
+    \item The system will be deployed in a remote location with no access to power for 1 year.
+    \item The system will be required to transmit data over long distances.
+    \item The system will be required to transmit very small amounts of data at regular intervals.
+    \item The system will be required to operate for long periods of time without maintenance.
+    \item The system will be required to operate in a harsh environment.
+\end{itemize}
+
+Given these requirements, we will now rank the wireless technologies ensembling on the following criteria:
+\begin{itemize}
+    \item Power consumption
+    \item Data throughput
+    \item Cost efficiency
+    \item Range
+\end{itemize}
+
+From worst to best, the ranking is as follows:
+\begin{enumerate}
+    \item \textbf{Bluetooth}
+    \item \textbf{Wifi}
+    \item \textbf{Legacy Cellular(2G/3G)}
+    \item \textbf{802.15.4/Thread}
+    \item \textbf{High Performance Cellular(4G/5G)}
+    \item \textbf{LoRA}
+    \item \textbf{NB-IoT/LTE-M}
+\end{enumerate}
+
+\subsection{Bluetooth}
+\subsubsection{Bluetooth}
+Bluetooth is the least suitable technology for our elephant tracking application. While Bluetooth Low Energy (BLE) offers excellent power efficiency, its fundamental limitation is range—typically restricted to 10-100 meters in ideal conditions and significantly less in densely forested areas. The Neyyar Wildlife Sanctuary's 2600 sq.km area would require an impractically high density of nodes to create a functional network using Bluetooth.
+
+Furthermore, Especially in the context of connections and advertising, Setting up Connections and also in Emergency Mode, where we need to have a connction that frequently transmit data, the Frequency Hopping Schematic of Bluetooth would be a hindrance and would adversely affect the power consumption of the device.
+
+While we could set up our own GATT server and client, for nodes advertising and listening, our "gateways" that would be listening would not be able to support the 1000 nodes that we would need to cover the area. Also, nodes would be unable to connect to multiple Centrals or even connect to other sensor nodes to relay data. This would be a significant hindrance to our application, as a lack of peer-to-peer communication would mean that we would need to have a Central for every 100 meters, which would be infeasible.
+That being said, Concessions to be made are that Bluetooth is quite cost efficient and the technology is readily available. It is also quite easy to implement, and the data throughput is quite high. However, the range of Bluetooth is quite limited, and it would be difficult to cover the entire area of interest with Bluetooth.
+\subsection{Wifi}
+Wifi unfortunately is not a good choice for this application. 802.11 is quite power hungry and requires a lot of power to transmit data, especially if we're transmitting at the 2.4 GHz frequency. The range of Wifi is also quite limited, and it would be difficult to cover the entire area of interest with Wifi. It is infeasible to put APNs in the forest to cover the entire area of interest, as we do not have ready access to power, nor is the environment conducive for easy MAC (as at higher frequency channels, these can get lost or muddled in the terrain). While a Mesh Topology could be used, the power consumption of the meshes that would repeat the signal would be too high, and also the range of the mesh would also be limited, since our nodes have a domain of 260 meters to cover. 
+
+This innately violates our power consumption constraint, as the access points necessary to cover the area of interest would consume too much power. That being said, the data throughput of WiFi is quite high, and it is quite cost efficient to run. India has been making a push for lower cost WiFi, and it is quite cheap to run (Jio 5G/HighSpeed Wifi Push). However, the range of Wifi is quite limited, and it would be difficult to cover the entire area of interest with Wifi.
+
+\subsection{Legacy Cellular(2G/3G)}
+Legacy Cellular is quite over-engineered for our application. The power 

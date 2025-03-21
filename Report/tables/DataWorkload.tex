@@ -1,0 +1,17 @@
+\begin{table}[ht!]
+    \centering
+    \small
+    \begin{tabularx}{1.1\columnwidth}{l|X|X|X|X}
+    \toprule
+    Mode & \multicolumn{2}{X|}{Monthly Workload (MB)} & \multicolumn{2}{X}{Yearly Workload (MB)} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+     & Downlink & Uplink & Downlink & Uplink \\
+    \midrule
+    Steady State Sensing & 0.00 & $\sim$0.13 & 0.00 & $\sim$1.58 \\
+    Event-Driven Update & 10.00 & Negligible & 120.00 & Negligible \\
+    Emergency Mode & 0.00 & $\sim$3.96 & 0.00 & $\sim$47.46 \\
+    \bottomrule
+    \end{tabularx}
+    \caption{\textbf{Downlink and Uplink Data Workload per Mode (MB) - Monthly vs Yearly}}
+    \label{tab:data_workload}
+\end{table}

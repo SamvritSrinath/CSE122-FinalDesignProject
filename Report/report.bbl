@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{0}
+\begin{thebibliography}{5}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -36,5 +36,60 @@
 \providecommand\bibinfo[2]{#2}
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[wxk({[n.\,d.]})]%
+        {wxkerela}
+ \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://in.indeed.com/career/telecommunications-technician/salaries/Kochi--Kerala}
+\showURL{%
+\tempurl}
+
+
+\bibitem[jee({[n.\,d.]})]%
+        {jeeprent}
+ \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.chennaitravels.in/mahindra-thar-rental}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Padalia et~al\mbox{.}(2020)]%
+        {elephantmap}
+\bibfield{author}{\bibinfo{person}{Hitendra Padalia}, \bibinfo{person}{Surajit Ghosh}, \bibinfo{person}{Sudhakar~Reddy Chintala}, \bibinfo{person}{Subrata Nandy}, \bibinfo{person}{Sarnam Singh}, {and} \bibinfo{person}{Senthil Kumar}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Assessment of historical forest cover loss and fragmentation in Asian elephant ranges in India}.
+\newblock \bibinfo{journal}{\emph{Environmental Monitoring and Assessment}}  \bibinfo{volume}{191} (\bibinfo{date}{01} \bibinfo{year}{2020}).
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1007/s10661-019-7696-5}
+\showDOI{\tempurl}
+
+
+\bibitem[Program({[n.\,d.]})]%
+        {aecp}
+\bibfield{author}{\bibinfo{person}{The Asian Elephant~Conservation Program}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.arocha.in/conservation/asian-elephant-conservation-program-aecp/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[SOS({[n.\,d.]})]%
+        {wildlifesos}
+\bibfield{author}{\bibinfo{person}{Wildlife SOS}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://wildlifesos.org/}
+\showURL{%
+\tempurl}
+
 
 \end{thebibliography}

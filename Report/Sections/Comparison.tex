@@ -1,0 +1,40 @@
+\section{Part C: Tradeoff Analysis and Final Assessment}
+\subsection{Technology Comparison}
+\begin{itemize}
+    \item \textbf{NB-IoT:}
+    \begin{itemize}
+        \item \textit{Pros:} High reliability, quality-of-service (QoS) guarantees, integration with existing cellular networks, and extended coverage in rural areas.
+        \item \textit{Cons:} Higher cost per data unit compared to LoRa; requires subscription-based pricing, though cellular homework shows competitive rates when scaled.
+    \end{itemize}
+    \item \textbf{LoRa:}
+    \begin{itemize}
+        \item \textit{Pros:} Extremely low power, lower hardware and deployment cost, and robust performance in low-data-rate scenarios.
+        \item \textit{Cons:} Limited QoS guarantees, potential issues with scalability in dense deployments, and reliance on custom gateways.
+    \end{itemize}
+    \item \textbf{Why NB-IoT and LoRa?} 
+    \begin{itemize}
+        \item Our application requires low data rates (approximately 100 KB/day per node) and extended battery life.
+        \item Both NB-IoT and LoRa excel in low-power operation and long-range connectivity. Cellular homework data indicates that emerging IoT cellular solutions (NB-IoT) are cost-effective for such use cases, while LoRa offers unparalleled power efficiency \cite{jio2022iot, telcel2022network}.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Deployment Strategy and Cost Analysis}
+\begin{itemize}
+    \item \textbf{Node Cost:} Approximately \$50 per node, scalable from a pilot of 100 to full deployments.
+    \item \textbf{Operational Cost:} NB-IoT involves data subscription fees which, per cellular homework, are competitive when negotiated at scale (e.g., pilot cost estimation in India shows figures around \$20,000 for 1000 devices). LoRa deployments may avoid recurring fees with a privately managed gateway network.
+    \item \textbf{Maintenance:} Low power design and potential solar augmentation minimize onsite maintenance visits.
+\end{itemize}
+
+\subsection{Final Assessment}
+Given the low data workload, remote deployment conditions, and strict power/cost constraints, our design recommends:
+\begin{itemize}
+    \item \textbf{Primary Technology:} LoRa for its ultra-low power consumption and cost benefits. Best suited when budget and energy efficiency are paramount.
+    \item \textbf{Secondary Option:} NB-IoT as a fallback or for applications where integration with existing cellular networks and better QoS is required.
+    \item \textbf{Network Deployment:} A mesh network with strategically placed gateways ensuring robust coverage over the tracking area.
+    \item \textbf{Data Management:} Central hub receives data from nodes, performs aggregation, and issues alerts in near real-time.
+    \item \textbf{Cost and Power:} Each node is designed to operate for at least one year on a single AA lithium battery; pilot and full-scale costs remain within competitive limits based on current cellular and IoT pricing structures.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Figures and Sample Code for Graphs}
+Below is sample LaTeX code for including figures and generating a simple data throughput graph.
