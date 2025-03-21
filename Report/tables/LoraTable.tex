@@ -1,0 +1,28 @@
+\begin{table*}[ht!]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{l|X|X|X|X}
+    \toprule
+    Mode & \multicolumn{2}{X|}{Receive Mode (RX)} & \multicolumn{2}{X}{Transmit Mode (TX)} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+     & Condition & Power (mA) & Condition & Power (mA) \\
+    \midrule
+    Sleep Mode & Configuration retained & 600 nA & - & - \\
+    Sleep Mode & Configuration retained + RC64k & 1.2 μA & - & - \\
+    Standby Mode & RC13M, XOSC OFF & 0.6 mA & - & - \\
+    Standby Mode & XOSC ON & 0.8 mA & - & - \\
+    \midrule
+    (ReceiveDC-DC Mode) & LoRa 125 kHz & 4.6 mA & +20 dBm,  & 84 mA \\
+    (Transmit PA Match)& Rx Boosted, FSK 4.8 kb/s & 4.8 mA & +17 dBm,  & 58 mA \\
+    & Rx Boosted, LoRa 125 kHz & 5.3 mA & +14 dBm, VBAT =  & 45 mA \\
+    \midrule
+    LoRa 868/915 MHz & FSK 4.8 kb/s & 8 mA & +22 dBm & 118 mA \\
+    (Receive LDO Mode) & LoRa 125 kHz & 8.8 mA & +20 dBm & 102 mA \\
+    (Transmit PA Match $+22 dBm$) & Rx Boosted, FSK 4.8 kb/s & 9.3 mA & +17 dBm & 95 mA \\
+    & Rx Boosted, LoRa 125 kHz & 10.1 mA & +14 dBm & 90 mA \\
+    \midrule
+    \bottomrule
+    \end{tabularx}
+    \caption{\textbf{LoRa Device Power Consumption in Receive and Transmit Modes}}
+    \label{tab:lora_power}
+\end{table*}
