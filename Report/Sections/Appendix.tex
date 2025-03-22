@@ -3,10 +3,49 @@
 The conversion rate today for USD to INR is $85.99:1$
 
 \subsection{LoRa Energy Tables}
-\input{tables/LoraSS.tex}
-\input{tables/LoraRX.tex}
-\input{tables/LoraAlert.tex}
-\input{tables/LoraTable.tex}
-
+\input{tables/LoraSS.tex} 
+\pagebreak
+\begin{table}[]
+    \centering
+    \small
+    \caption{Energy Consumption for Downloading 10 MB Data}
+    \begin{tabularx}{\columnwidth}{l l l}
+    \toprule
+    Mode & Regulator & Energy (Joules) \\
+    \midrule
+    LoRa 125 kHz & DC-DC & 127.339 J \\
+    FSK 4.8 kbps & DC-DC & 276.824 J \\
+    LoRa 125 kHz & LDO & 243.605 J \\
+    FSK 4.8 kbps & LDO & 536.347 J \\
+    \bottomrule
+    \end{tabularx}
+    \caption{\textbf{LoRA Energy Consumption for Downloading 10 MB Data}}
+    \label{tab:loraRx}
+\end{table} 
+\pagebreak
 \subsection{NB-IoT Energy Tables}
-\input{figures/NbTable.tex}
+\input{tables/nbIOTRx.tex} 
+\pagebreak
+\input{tables/nbiotSS.tex} 
+\pagebreak
+\subsection{LoRA and NbIOT Specs}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/DataRate.jpg}
+    \caption{Data Rate based on Spreading Factor for LoRA, INR Standards}
+    \label{fig:lora}
+\end{figure} 
+\pagebreak
+\input{tables/LoraTable.tex} 
+\pagebreak
+
+\include{figures/NbTable.tex}
+\pagebreak
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Coverage.jpg}
+    \caption{Coverage Comparison of 4G/NB-IoT in India via Jio}
+    \label{fig:coverage}
+\end{figure*} 
+
+

@@ -1,16 +1,17 @@
-\begin{table*}[ht!]
+\begin{table}[ht]
     \centering
-    \footnotesize
-    \begin{tabularx}{0.8\columnwidth}{l l l}
+    \small
+    \caption{Energy Consumption for Downloading 10 MB Data}
+    \begin{tabularx}{\columnwidth}{l l l}
     \toprule
     Mode & Regulator & Energy (Joules) \\
     \midrule
-    LoRa 125 kHz & DC-DC & 127.339 mJ \\
-    FSK 4.8 kbps & DC-DC & 276.824 mJ \\
-    LoRa 125 kHz & LDO & 243.605 mJ \\
-    FSK 4.8 kbps & LDO & 536.347 mJ \\
+    LoRa 125 kHz & DC-DC & 127.339 J \\
+    FSK 4.8 kbps & DC-DC & 276.824 J \\
+    LoRa 125 kHz & LDO & 243.605 J \\
+    FSK 4.8 kbps & LDO & 536.347 J \\
     \bottomrule
     \end{tabularx}
-    \caption{Energy Consumption for Downloading 10 MB Data}
-    \label{tab:lora_rx}
-\end{table*}
+    \caption{\textbf{LoRA Energy Consumption for Downloading 10 MB Data}}
+    \label{tab:loraRx}
+\end{table}

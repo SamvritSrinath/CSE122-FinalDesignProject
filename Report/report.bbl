@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{17}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -70,6 +70,35 @@
 \tempurl}
 
 
+\bibitem[Dce({[n.\,d.]})]%
+        {Dcell}
+ \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+\urldef\tempurl%
+\url{{https://uk.rs-online.com/web/content/discovery/ideas-and-advice/d-batteries-guide}}
+\showURL{%
+\tempurl}
+
+
+\bibitem[AA({[n.\,d.]})]%
+        {AA}
+ \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+\urldef\tempurl%
+\url{{https://www.tycorun.com/blogs/news/a-complete-guide-to-aa-batteries}}
+\showURL{%
+\tempurl}
+
+
+\bibitem[aie({[n.\,d.]})]%
+        {aielephant}
+ \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+
+
 \bibitem[{Danish Khan}({[n.\,d.]})]%
         {loraIndia}
 \bibfield{author}{\bibinfo{person}{{Danish Khan}}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
@@ -81,6 +110,28 @@
 \tempurl}
 
 
+\bibitem[{Gump's Grocery}({[n.\,d.]})]%
+        {GumpSensor}
+\bibfield{author}{\bibinfo{person}{{Gump's Grocery}}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+\urldef\tempurl%
+\url{{https://www.amazon.com/Gumps-grocery-HC-SR501-Infrared-Raspberry/dp/B08399XNTC/ref=asc_df_B08399XNTC?mcid=55b636e86eb53a79be3317cc4a7a68d9&hvocijid=7843168915725516339-B08399XNTC-&hvexpln=73&tag=hyprod-20&linkCode=df0&hvadid=721245378154&hvpos=&hvnetw=g&hvrand=7843168915725516339&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9031300&hvtargid=pla-2281435178098&psc=1}}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{LoRA}({[n.\,d.]})]%
+        {loraGuidelines}
+\bibfield{author}{\bibinfo{person}{{LoRA}}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{{https://lora-alliance.org/wp-content/uploads/2020/11/lorawan_regional_parameters_v1.0.3reva_0.pdf}}
+\showURL{%
+\tempurl}
+
+
 \bibitem[Mint(2024)]%
         {3gsunset}
 \bibfield{author}{\bibinfo{person}{Live Mint}.} \bibinfo{year}{2024}\natexlab{}.
@@ -88,6 +139,17 @@
 \newblock
 \urldef\tempurl%
 \url{https://www.livemint.com/industry/telecom/reliance-jio-urges-government-to-shut-down-2g-3g-services-in-the-country-vodafone-idea-heres-what-you-should-know-11706582831319.html}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{NBIOT}({[n.\,d.]})]%
+        {nbPower}
+\bibfield{author}{\bibinfo{person}{{NBIOT}}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{{https://www.mouser.com/pdfDocs/SARA-R5_DataSheet_UBX-19016638.pdf}}
 \showURL{%
 \tempurl}
 
@@ -134,6 +196,17 @@
 \newblock
 \urldef\tempurl%
 \url{https://www.arocha.in/conservation/asian-elephant-conservation-program-aecp/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{SARA}({[n.\,d.]})]%
+        {nbprod}
+\bibfield{author}{\bibinfo{person}{{SARA}}.} \bibinfo{year}{[n.\,d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{}.
+\newblock
+\urldef\tempurl%
+\url{{https://www.u-blox.com/en/product/sara-r5-series}}
 \showURL{%
 \tempurl}
 

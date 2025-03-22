@@ -1,2 +1,58 @@
-\section{Conclusion}
+\section{Comparison and Conclusion}
+\label{sec:conclusion}
+
+While our empirical understandings of both NB-IOT and LoRA and elephant migration are quite constrained, we have been able to make some general conclusions about the two technologies. 
+
+One thing that needs to be reiterated is the fact that the two technologies are in different places in terms of adoption, with NB-IoT being a more mature technology. This is reflected in the fact that NB-IoT has a higher data rate, lower latency, and better coverage than LoRa. However, LoRa has a much lower power consumption, which is a critical factor in our application.
+
+Based on our extensive analysis of energy consumption for our Elephant Tracking Application, we conclude that NB-IoT outperforms LoRa on these critical metrics:
+\begin{itemize}
+    \item \textbf{Data Speed: } NB-IoT has a higher data rate than LoRa, which is critical for our application.
+    \item \textbf{Coverage: } NB-IoT has a better coverage than LoRa, which is critical for our application.
+    \item \textbf{Ease of Implementation: } NB-IoT can leverage the already existing cellular infrastructure, which is a significant advantage over LoRa. 
+\end{itemize}
+
+However, LoRa outperforms NB-IoT on the following critical metrics:
+\begin{itemize}
+    \item \textbf{Power Consumption: } LoRa has a much lower power consumption than NB-IoT, which is critical for our application.
+    \item \textbf{Cost: } LoRa has a much lower cost than NB-IoT, which is critical for our application.
+\end{itemize}
+
+NB-IoT Cellular modules are more expensive than LoRa modules, on the order of $50$ per module
+\cite{nbprod}. That being said, the tradeoff here is that NB-IoT already has interworkings with the existing cellular infrastructure. Carriers such as Airtel, Vodafone, and Jio have already deployed large scale 4G networks in India, which LTE-M and NB-IoT can directly interface with. Clienting and contracting a large scale pilot, especially on the order of a $1000$ devices would result in future deployment, less delay in the cost for our workers (quantified earlier in the paper), and a more robust system overall.  The cost of the modules is a one-time cost, and while NB-IOT plans might have recurring payments, this might be cheaper then setting up our own LoRa network which has yet to mature. Unlike NB-IoT, LoRA reqiures external infrastructure like gateways, client and application servers to translate between the LoRa network and the internet. This is a significant disadvantage for LoRa, as it requires a lot of upfront investment in infrastructure.
+
+Subsequently, in the case of massive emergency situations, the NB-IoT network can directly interface with other cellular mediums and can be used to send out emergency alerts should that become a future requirement of the system. Ensembled with a higher data rate, this could be a critical advantage in the future, especially with our 3rd Operating Mode \textbf{Emergency Mode}, which could interact directly with municipal services. While the Spreading Factor of LoRA can be adjusted to increase data rate, this would be inversely proportional to the range of the device, and also lead to a higher power consumption, reducing the lifetime of our end devices. 
+
+Empirically, NB-IoT also shines in constant reception. As indicated in \ref{tab:nbiotrx}, using different state schemes like LDO to preserve power, the energy consumption of NB-IoT is still lower than LoRa. $536.347$ Joules for LoRA versus $497.28$ Joules for NB-IoT. This is a significant advantage for NB-IoT, as the devices will be in a constant listening state, waiting for the next message from the elephants. If we were to use LoRa to scale up our devices into more of a mesh topology, where we were listening to multiple devices at once, the power consumption would be even greater as evidenced with our firmware update costs. 
+
+That being said, concessions for LoRA include its ability to be used in a mesh topology, which is a significant advantage for our application. This would allow us to have a more robust network, where the devices could communicate with each other, and relay messages to the base station. Emergency announcements would not have to be centralized to the base station, and could be relayed through meshes of devices instead. Redundancy in the network could be increased for very little cost, and the network could be more robust overall. 
+
+LoRA also allows for us to toggle between multiple different modulation schemes unlike NB-IoT, whether we want to increase throughput or preserve data integrity through higher spreading factors, we have the flexibility to do so as a property of the LoRA PHY ($SF7\sim12$). Likewise in India there is also no restriction on the dwell time for LoRA, which could be used intelligently to increase the range of our devices. And as a Standard, LoRA has a longer range than NB-IoT, which could be an advantage to us in the future, should LoRA mature and become more popular. 
+
+Qualitatively, LoRA shines when we want to send data in bursts and simply transmit messages without caring about packet integrity nor data rate. If power was not a concern and we could send data in bursts, LoRA would be the clear winner (i.e. aggregated statistics versus periodic monitoring), as LoRA has a much lower cost for transmission versus NB-IoT. IF our end devices become more "intelligent", and can aggregate data before sending it, transmission periods would shrink, and the power consumption of LoRA would be even less that what we have calculated earlier, as the device would be in a sleep state for longer periods of time, and the cost to send a message would be less. $\frac{byte}{cost_{LoRA}} << \frac{byte}{cost_{NB-IoT}}$.
+
+Looking prospectively, LoRa serves as a valuable backup to NB-IoT, current work in this space primarily uses 4G networks to serve as their communication network, but applications like AI Tracking with elephants \cite{aielephant}, could use a more "new" technology like LoRa as the backbone for any communication, especially in remote areas. When sending more granular data, LoRa could be more advantageous, as our current application sends a very rudimentary message (i.e. "Location + Is Present"), but larger packet sizes could lend themselves to LoRA.
+
+
+Ultimately, the decision between NB-IoT and LoRa will depend on the specific requirements of the application. For our Elephant Tracking Application, we have decided to use NB-IoT as the primary communication technology, due to its higher data rate, better coverage, and ease of implementation, while accepting that 2 times the power is still supported by most common batteries, and does not drastically reduce the lifetime of our devices. 
+
+\subsection{Application Requirements}
+At a high level our application will look like this:
+\begin{itemize}
+    \item \textbf{Application Goal}: Monitor elephant migration patterns in Southern India.
+    \item \textbf{Application Requirements}: Use an Infrared Sensor to detect and localize elephants based on heat signatures.
+    \item \textbf{Application Modes}: Steady State Sensing, Event-Driven Update, Emergency Mode.
+    \item \textbf{Application Data}: Location, Presence, Timestamp. Packet Size, 16 bytes.
+    \item \textbf{Application Network}: NB-IoT.
+    \item \textbf{Application Power Source}: $D$-Cell Battery or 3 AA Batteries.
+    \item \textbf{Application Cost}: ($54$ per Cell Module + $8$ per sensor + NB-IoT Subscription (roughly 7 dollars based on Cellular Prices) * 12) * 1000 + $2091.96$ deployment fee (Labor and Travel).  In aggregate $148,091.66$ for a $1000$ device deployment for the first year.
+    \item \textbf{Application Network Topology}: Star Topology.
+    \item \textbf{Application Data Rate}: 140 kbps.
+    \item \textbf{Application Range}: 10 km.
+\end{itemize}
+
 This paper has detailed the design considerations, energy modeling, and tradeoff analysis for an IoT-based elephant migration tracking system. By evaluating multiple wireless technologies, NB-IoT and LoRa emerge as the most viable solutions given our requirements. The final design is both cost-effective and energy-efficient, promising a robust solution for real-world wildlife monitoring.
+
+Thanks for reading!
+
+

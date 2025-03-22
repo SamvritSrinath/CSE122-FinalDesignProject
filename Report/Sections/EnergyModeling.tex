@@ -9,10 +9,9 @@ The IR sensor we will be using is the \textit{GUMP's grocery HC-SR501 Infrared P
 \subsection{LoRa}
 \label{sec:LoRa}
 Our Application is based in Kerala $ + $ Tamil Nadu in India, so our LoRA specifications are different than the conventional US guidelines. In particular, in India we are able to use any Spreading Factor (SF) from SF7 to SF12, at 125 kHz bandwidth. This is because the Indian government has allocated the 865-867 MHz band for LoRaWAN use, which is different from the US guidelines. Another important thing is that according to \cite{loraGuidelines}, \textbf{there is no dwell or duty-cycle limitation on LoRA transmission}, according to Section 2.10.3 (IN865-867 Data Rate and End Device Output Power Encoding).
-\todo{Insert Figure of Table here}
 
 
-Table \ref{tab:lora_power} has some truncated findings that are also found in screenshots (linked in appendix) from the Lora Guidelines. For our purposes, since we are using a Lora Module (I assume that we are using the SX1262 for transmit), and we will be comparing the power consumption of the device in both DC-DC and LDO mode. The LDO mode is more power hungry, and the DC-DC mode is more efficient. 
+In the appendix, I've linked some of the LoRA quantities that are also found in screenshots (linked in appendix) from the Lora Guidelines. For our purposes, since we are using a Lora Module (I assume that we are using the SX1262 for transmit), and we will be comparing the power consumption of the device in both DC-DC and LDO mode. The LDO mode is more power hungry, and the DC-DC mode is more efficient. 
 
 Consider the operating modes that we defined earlier: 
 \begin{itemize}
@@ -22,7 +21,7 @@ Consider the operating modes that we defined earlier:
 \end{itemize}
 \subsubsection{Turning Off and On}
 Since our time interval is so large, turning off the radio and then turning on will be marginal relative to the power consumption of the device. This is because either we will sleep for a long time, or we will be receiving for a long time, and the power consumption relative to the major operations of the device is in the order of nanoAmps versus Milliamps (nearly a factor of $10^6$). Susbequently, the datasheet provides the power consumption of the device in Sleep, but not necessarily the power consumption it takes to turn on the device $\rightarrow$ for the purposes of this report, we will assume that the power consumption of turning on the device is negligible (as a couple milliseconds relative to the 5 minute interval is not significant). 
-In Steady State, the device will be in Standby Mode for 5 minutes, wake up and second a transmission, and then go back to Standby/standby. The power consumption for the standby duration is given by $800 nA \times 3.3 V * 300 s = 792\mu J$. This is with the crystal clock setting (XOSC) on. Then in Transmit this varies based on the power setting, let's see which mode is best for our application. 
+In Steady State, the device will be in Sleep Mode for 5 minutes, wake up and second a transmission, and then go back to Sleep/standby. The power consumption for the Sleep duration is given by $1.2 \mu A \times 3.3 V * 300 s = 1.188 mJ$. This is with the crystal clock setting (XOSC) on. Then in Transmit this varies based on the power setting, let's see which mode is best for our application. 
 
 Now the possible configurations we have for LoRA are 
 $SF7, SF8, SF9, SF10, SF11, SF12$ at $125 kHz$ bandwidth. Then we can choose the power setting for the device, which can be $+14 dBm, +17 dBm, +20 dBm, +22 dBm$, as well as which mode we want to be in for hardware state (DC-DC or LDO).
@@ -33,7 +32,7 @@ In general we have the formula $$E_{tx} = (\frac{P_{size}}{R} * I_{tx} * V_{opt}
 
 The Data rate will be dependent on the Spreading Factor, and the Current for Transmission will be dependent on the power setting.
 \subsection{Steady State Transmission}
-In essence, Table \ref{tab:lora_power_revised} contains simulated results of running the LoRa device under a Steady State configuration for 24 hours. The results are based on the power consumption of the device in different modes. Operating at SF7 with the lowest power setting of +14 dBm, the device consumes 1.229 mJ of energy over 24 hours, and this makes sense as the "chirps" are shorter and so messages can be transmitted faster. Intuitively, the higher the spreading factor, the more energy is consumed due to the longer chirps. At the highest end, SF12 with +22 dBm with a PA Target of +22 dBm, the device consumes 57.647 mJ of energy over 24 hours. This is a significant amount of energy, and it is clear that the device is not optimized for this setting. A configuration that strikes a sweet balance between energy consumption and data rate is SF7 with a +22 target with a Transmit Power of 22 dBm. This is the highest setting for the device, but by transmitting at a higher power, we still get a good data rate and a decent energy consumption of only 2.852 mJ over 24 hours, while still taking advantage of the LoRA's long range capabilities.
+In essence, Table \ref{tab:lora_power_revised} contains simulated results of running the LoRa device under a Steady State configuration for 24 hours. The results are based on the power consumption of the device in different modes. Operating at SF7 with the lowest power setting of +14 dBm, the device consumes 30.310 J of energy over 24 hours, and this makes sense as the "chirps" are shorter and so messages can be transmitted faster. Intuitively, the higher the spreading factor, the more energy is consumed due to the longer chirps. At the highest end, SF12 with +22 dBm with a PA Target of +22 dBm, the device consumes 1.249 J of energy over 24 hours, nearly 30 times as much. This is a significant amount of energy, and it is clear that the device is not optimized for this setting. A configuration that strikes a sweet balance between energy consumption and data rate is SF7 with a +22 target with a Transmit Power of 22 dBm. This is the highest setting for the device, but by transmitting at a higher power, we still get a good data rate and a decent energy consumption of only 2.852 mJ over 24 hours, while still taking advantage of the LoRA's long range capabilities.
 
 \subsection{Event-Driven Update}
 In the cases where we do an update based on an event, ideally this is akin to a \textbf{Firmware Update} or a \textbf{Critical Event}. In this case, this is a downlink event where we will download a new patch, of 10 MB in size. Depending on our configuration, we can either use the DC-DC mode or the LDO mode. The DC-DC mode is more efficient, but the LDO mode is more power hungry.
@@ -59,7 +58,61 @@ Using the data sheet in \cite{nbPower}, there are many configurations for which 
 
 The main tradeoff with the NB-IOT approach is that while sleep mode is around the same as LORA, transmission is very high (around $2\sim3$ the magnitude to transfer at the same power strength as LoRA). But this is is a high level artifact of the technology, that can only be absorobed in our implementation due to current adoption standards of LoRA in India (and the ubiquitous nature of 4G and 5G in the region).
 
+\subsection{Sleeping and Waking Up}
+The datasheet specified that Power Off takes 0.5 $\mu A$ of current, but makes no mention of the power consumption of turning on the device. As with LoRA to keep a standardized metric across both wireless services, we will assume that the power consumption of turning on the device is negligible. This is because the use case of our application are such that the device will either be in standby for a long time (much larger than the time it takes to turn on the device), or the device will be transmitting for a long time (i.e. in Emergency Mode), or the device will be in a low power mode for a long time (i.e. in Steady State Sensing). Thus, the power consumption of turning on the device is negligible relative to the power consumption of the device in the major operations, especially when TX and RX are on the order of MilliAmps, and the difference from $0.5 \mu A$ to a TX state is around $1000 times$ the power consumption (i.e. we would need to turn on many times to make the power consumption of turning on the device significant).
 
+\subsection{Steady State Sensing}
+As with LoRA, the formula we have still holds where $$E_{tx} = (\frac{P_{size}}{R} * I_{tx} * V_{opt}) * T_{tx} + E_{rest}$$, where $P_{size}$ is the packet size, $R$ is the data rate, and the other terms are the current, the operating Voltage, and the standby Energy. Using the narrowband standard $NB-02$ which is the standard for this SARA R500S product line(and since we are using NB-IOT to maximize range), our data rate is 140 kbps UL and 125 kbps DL. The current for transmission is dependent on the power setting, and the operating voltage is $3.8V$. Based on Figure \ref{fig:NbTable}, we can set an \textit{Extended Disconnected Reception} window of nearly 65536 ms, which yields to an operating current of $1.1 mA$. Thus, while either in standby we will have $1.1 mA * 3.8 V * 300s = 1.089 J$ OR while off we'll have $0.5 \mu A * 3.8 V * 300s = 1.254 mJ$. This is roughly the same as LoRA for Switching off the device, but the power while sleeping is quite a bit higher (1.5x). 
+
+What's key to understand though, is since the data rate is so high, the transmission time is much lower than LoRA, and the power consumption is much lower due to this. Consider the $T_{tx}$ for a LoRA with SF12, $\frac{16 * 8}{250} = 0.512 s$, but for NB-IOT, $\frac{16 * 8}{140000} = 0.1 ms$. This is a signifcant difference and so even if the power consumption is higher, the Power it takes for the device to transmit is much lower due to the high data rate. \textbf{This observation holds for even larger packet sizes}, because as we increase $|P_{tx}|$, the duration for both LoRA and NB-IOT increases linearly, but the duration for NB-IOT is still much lower than LoRA.
+
+This is where $NB-IOT$ has a leg up quantitatively on LoRA, as in spite of having higher power consumption for TX, the \textbf{Interval transpired for the device to transmit is much lower}. This is a key point to consider, as the device will be transmitting for a much shorter time, and thus the power consumption is much lower.
+
+
+\subsection{Event-Driven Update}
+In the cases where we do an update based on an event, ideally this is akin to a \textbf{Firmware Update} or a \textbf{Critical Event}. When we listen for a 10 MB update from the tower, let's assume that the tower is transmitting at $+23 dBm$, then our RX current is now $195 mA$, much higher than the LoRA's 10.1 mA when listening at 125 kHz Bandwidth. This is a significant difference, and it is clear that NB-IOT is not optimized for listening or frequent TX/RX Transfer. To listen in for our firmware Update once a month, this is roughly the same as LoRA, where it's on the order of a couple hundred Joules. 
+
+\subsection{Emergency Mode}
+When the device is in Emergency Mode, we will be transmitting at the highest power setting, at +23 dBm. Based on our data so far, at this power setting, we use $395 mA$ of energy per transmission, but since we're still transmitting at the same data rate, the transmission time is still much lower than LoRA. Roughly, at $395 dBm$ when sleeping, we still only use $559.280 \mu J$ of energy, and this is much lower than LoRA. When standbying, we use $361.295 mJ$ of energy, which is still an order of magnitude less than LoRA. 
+
+
+\section{Takeaways and Batteries}
+\label{sec:Takeaways}
+The optimal configuration for LoRA is to transmit at SF7 with a +22 dBm Power Setting, and this costs 78.662 mJ per day, and the optimal configuration for NB-IOT is to transmit at the highest power setting of +23 dBm, and this costs 559.280 $\mu J$ per day. This is a significant difference, and it is clear that NB-IOT is much more power efficient than LoRA. This is because the data rate for NB-IOT is much higher than LoRA, and the transmission time is much lower. This is a key point to consider, as the device will be transmitting for a much shorter time, and thus the power consumption is much lower. 
+
+\section{Part C: Higher Level Findings + Batteries}
+\input{tables/Comparison}
+
+Ultimately where each technology shines is that for \textbf{receiving}, not at faster speeds but to conserve energy in general, \textbf{LoRA is the better choice.} This is because the power consumption of the device in receive mode is much lower than NB-IOT. However, for \textbf{transmitting}, \textbf{NB-IOT is the better choice.} This is because the power consumption of the device in transmit mode is much lower than LoRA. This is a key point to consider, as the device will be transmitting for a much shorter time, and thus the power consumption is much lower. That being said, the power consumption of the device in Sleep mode is slightly smaller for NB-IOT, but standby is a bit higher (0.8 to 1.1 mA). That being said for gateways and perhaps for nodes that might have to listen often, LoRA is the better choice. Arguably it comes down to the role of the device in our application, for nodes that frequently have to undergo patches or updates, LoRA will suit them better, as they can save more energy when listening to larger updates. 
+
+However, since the main proprietary goal of our application is to simply transmit frequently updates and not listen, NB-IOT is the better choice. This is because the power consumption of the device in transmit mode is much lower than LoRA, due to the fact that our transmit frequency is significantly higher ($140 kbps$ vs $5.47 kbps$). This is a key point to consider, as the device will be transmitting for a much shorter time, and thus the power consumption is much lower. That being said, if our NB-IOT service does not support such high speeds, metrics will lean more and more towards LoRA. 
+
+
+\subsection{Battery}
+\label{sec:Battery}
+
+Consider a year long usage of the following application. This is modeled by the equation $E_{total} = E_{tx} + E_{rx} + E_{sleep}$, where $E_{tx}$ is the energy consumed by the device in transmit mode, $E_{rx}$ is the energy consumed by the device in receive mode, and $E_{sleep}$ is the energy consumed by the device in sleep mode.
+
+Every month, we do an $E_{rx}$ for 10 MB, and then every 5 minutes, we send an update in Steady State sensing. For brevity, we generalize a trend in our network, s.t. \textbf{5\% of our time we are in Emergency Mode, and the other 95\% of the time in TX we are in Steady State Sensing}. This is a rough estimate, but it is a good approximation for our application. Intuitively, the search space is quite vast, and it's not practical to assume that more than $5\%$ of the time we will be in Emergency Mode (that means there will be a rampant Emergency Threat for nearly 19 days under this model).
+
+
+Thus, the total energy consumed by the device in a year is given by $$E_{total} = 12 * E_{rx} + 12 * 24 * 30 * (0.95 * E_{steady} + 0.05 * E_{emerg})$$ . This is a rough estimate, but it is a good approximation for our application. It captures the essence of our end node behavior, that we will be updating once every month, and then transmitting every 5 minutes, and steady and emergency mode dictate how much we sleep and how often we transmit. 
+
+
+Thus, the total energy for LoRA is
+$$\begin{aligned}E_{year} = 12 * 243.605 J +&\\ 12 * 24 * 30 * (0.95 * 56.046 mJ + 0.05 * 1.638 J) \\&= 4090.91 J\end{aligned}$$
+
+And the total energy for NB-IOT is
+$$\begin{aligned}E_{year} = 12 * 497.28 J +&\\ 12 * 24 * 30 * (0.95 * 361.295 mJ + 0.05 * 559.280 \mu J) = 6.5 J \\&= 9174.478 J\end{aligned}$$
+
+This is a significant difference, and it is clear that NB-IOT is much more power hungry than LoRA, that being said, existing infrastructure lends itself to a more optimal usage of NB-IOT, and the power consumption of the device in transmit mode is much lower than LoRA. Much of the change can also be chalked up to the fact that we chose a very unreliable medium of communication, choosing $SF7$, and $+20 dBm$ in contrast to overthrottling the NB-IOT device to transmit at its max $+23dBm$ with the max power setting. While it may seem that the power consumption of the device in transmit mode is much higher than LoRA, balancing data integrity for only 2 times the power is a good tradeoff that I am willing to balance. 
+
+
+As such, a battery than can empirically support our system for a year must be a battery with at least $\frac{9175}{V_{nom}}$ mAh. Thus, we have two options: 
+\begin{itemize}
+    \item A Single 1.5 V D-Cell Battery with a capacity of around 15K mAh, some batteries are rated for $15K \sim 20K$ mAh, and this is a good choice for our application. This will last us for at least a year. At the standard $1.5V$ this is at least $22K mAh$, which could serve our end nodes for at least 2 years.\cite{Dcell}
+    \item 3 AA Batteries in Series, with a capacity close to $2500 mAh$ each, $7500 * 1.5 V = 11250 mAh$, which is a bit lower than the D-Cell, but still a good choice for our application. This will last us for at least a year.\cite{AA}
+\end{itemize}
 
 
 
